@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "sivashree117/royaltable"
+        DOCKER_IMAGE = "sivashree117/royaltable"
     }
 
     stages {
@@ -15,9 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat '''
-                docker build -t %IMAGE_NAME%:latest .
-                '''
+                bat 'docker build -t %DOCKER_IMAGE%:latest .'
             }
         }
 
@@ -37,18 +35,16 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                bat '''
-                docker push %IMAGE_NAME%:latest
-                '''
+                bat 'docker push %DOCKER_IMAGE%:latest'
             }
         }
 
         stage('Run Container') {
             steps {
                 bat '''
-                docker stop royaltable-container || exit 0
-                docker rm royaltable-container || exit 0
-                docker run -d -p 8080:80 --name royaltable-container %IMAGE_NAME%:latest
+                docker stop royaltable || true
+                docker rm royaltable || true
+                docker run -d -p 8081:80 --name royaltable %DOCKER_IMAGE%:latest
                 '''
             }
         }
