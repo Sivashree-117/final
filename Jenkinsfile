@@ -21,18 +21,20 @@ pipeline {
         }
 
         stage('Docker Login') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'sivashree117', passwordVariable: 'Sivashree@26')]) {
-                    bat 'echo %PASS% | docker login -u %USER% --password-stdin'
-                }
-            }
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'sivashree117', passwordVariable: 'Sivashree@26')]) {
+            bat """
+            echo %PASS% | docker login -u %USER% --password-stdin
+            """
         }
+    }
+}
 
         stage('Push Image') {
-            steps {
-                bat 'docker push %DOCKER_IMAGE%:%DOCKER_TAG%'
-            }
-        }
+    steps {
+        bat "docker push sivashree117/royaltable:latest"
+    }
+}
 
         stage('Run Container') {
             steps {
