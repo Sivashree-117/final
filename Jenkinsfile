@@ -1,48 +1,43 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKER_IMAGE = "sivashree117/royaltable"
-        DOCKER_TAG = "latest"
-    }
-
     stages {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Sivashree-117/final.git'
+                git 'https://github.com/Sivashree-117/final.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKER_IMAGE%:%DOCKER_TAG% .'
+                bat 'docker build -t sivashree117/royaltable:latest .'
             }
         }
 
         stage('Docker Login') {
-    steps {
-        withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'sivashree117', passwordVariable: 'Sivashree@26')]) {
-            bat """
-            echo %PASS% | docker login -u %USER% --password-stdin
-            """
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker',
+                    usernameVariable: 'sivashree117',
+                    passwordVariable: 'Sivashree@26'
+                )]) {
+                    bat '''
+                    echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                    '''
+                }
+            }
         }
-    }
-}
 
         stage('Push Image') {
-    steps {
-        bat "docker push sivashree117/royaltable:latest"
-    }
-}
+            steps {
+                bat 'docker push sivashree117/royaltable:latest'
+            }
+        }
 
         stage('Run Container') {
             steps {
-                bat '''
-                docker stop royaltable || exit 0
-                docker rm royaltable || exit 0
-                docker run -d -p 8080:80 --name royaltable %DOCKER_IMAGE%:%DOCKER_TAG%
-                '''
+                bat 'docker run -d -p 8080:80 sivashree117/royaltable:latest'
             }
         }
     }
