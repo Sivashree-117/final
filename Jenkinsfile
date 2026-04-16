@@ -1,24 +1,19 @@
 pipeline {
     agent any
-
     environment {
         DOCKER_IMAGE = "sivashree117/royaltable"
     }
-
     stages {
-
         stage('Clone Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/Sivashree-117/final.git'
             }
         }
-
         stage('Build Docker Image') {
             steps {
                 bat "docker build -t %DOCKER_IMAGE%:latest ."
             }
         }
-
         stage('Docker Login') {
             steps {
                 withCredentials([usernamePassword(
@@ -32,7 +27,6 @@ pipeline {
                 }
             }
         }
-
         stage('Push Image') {
             steps {
                 bat "docker push %DOCKER_IMAGE%:latest"
