@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🌟 RoyalTable | Premium Multi-Color Dining Experience 🌟</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM WELCOME SCREEN */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(125deg, #ff0844, #ffb199, #00b4db, #0083b0, #f7971e);
+            background-size: 400% 400%;
+            animation: premiumFlow 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes premiumFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border-radius: 60px;
+            padding: 60px 80px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+            animation: floatGlow 1s ease-out;
+        }
+
+        @keyframes floatGlow {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-card h1 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFE6B0, #FFB347, #FF6B6B, #C06CFF, #4ECDC4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .enter-btn {
+            background: linear-gradient(95deg, #c9296c, #FF8C00);
+            border: none;
+            padding: 16px 56px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 60px;
+            margin-top: 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #1a1a2e;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .enter-btn:hover { transform: scale(1.08); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+        /* MAIN APP */
+        .app-main {
+            display: none;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 35px 50px;
+        }
+
+        /* FLOATING MENU BUTTON */
+        .menu-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #a80f4f, #0a8ebd);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1100;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: 0.3s;
+            border: 2px solid rgba(255,255,200,0.6);
+        }
+
+        .menu-float i { font-size: 32px; color: white; }
+        .menu-float:hover { transform: scale(1.1) rotate(5deg); }
+
+        /* MENU MODAL - ATTRACTIVE */
+        .menu-premium {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 2100;
+            overflow-y: auto;
+        }
+
+        .menu-inner {
+            max-width: 1300px;
+            margin: 40px auto;
+            background: linear-gradient(145deg, #fff9f0, #fff0e7);
+            border-radius: 60px;
+            padding: 35px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        .menu-cat {
+            background: linear-gradient(115deg, #e15f8c, #eeda66);
+            margin: 30px 0;
+            padding: 22px 25px;
+            border-radius: 45px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .menu-item-card {
+            background: linear-gradient(95deg, #ba4791, #35b3cf);
+            padding: 12px;
+            border-radius: 40px;
+            text-align: center;
+            font-weight: 600;
+            transition: 0.2s;
+            cursor: default;
+            color: #2c1810;
+        }
+
+        /* PAGE CONTAINER - VIBRANT GRADIENT */
+        .page-card {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 50%, #fdeff2 100%);
+            border-radius: 55px;
+            padding: 40px 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 30px 55px rgba(0, 0, 0, 0.25);
+            animation: pageRise 0.5s ease;
+        }
+
+        @keyframes pageRise {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-header {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #c31432, #ff4e50, #f9d423, #00b09b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .sub-tag {
+            background: linear-gradient(95deg, #fbc2eb, #a6c1ee);
+            padding: 8px 24px;
+            border-radius: 50px;
+            display: inline-block;
+            font-weight: 600;
+            margin-bottom: 35px;
+            color: #1f1f2e;
+        }
+
+        /* GRID FOR LOCATIONS/HOTELS */
+        .rainbow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .gradient-card {
+            padding: 28px 15px;
+            border-radius: 45px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.25s;
+            background: linear-gradient(115deg, #ffecd2, #fcb69f);
+            color: #2c2c2c;
+            box-shadow: 0 12px 22px rgba(0,0,0,0.12);
+        }
+
+        .gradient-card:nth-child(1) { background: linear-gradient(115deg, #ff9a9e, #fecfef); }
+        .gradient-card:nth-child(2) { background: linear-gradient(115deg, #a1c4fd, #c2e9fb); }
+        .gradient-card:nth-child(3) { background: linear-gradient(115deg, #ffdde1, #ee9ca7); }
+        .gradient-card:nth-child(4) { background: linear-gradient(115deg, #bffc79, #96e6a1); }
+        .gradient-card:nth-child(5) { background: linear-gradient(115deg, #fbc2eb, #a18cd1); }
+
+        .gradient-card:hover { transform: translateY(-8px) scale(1.02); filter: brightness(1.02); }
+
+        /* ATTRACTIVE TABLE GRID - VIBRANT TILES */
+        .table-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+            gap: 22px;
+            margin: 40px 0;
+        }
+
+        .table-magic {
+            padding: 22px 8px;
+            text-align: center;
+            border-radius: 35px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            transition: 0.25s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .table-avail {
+            background: linear-gradient(125deg, #11998e, #a8085e);
+            color: white;
+            box-shadow: 0 12px 25px rgba(4, 62, 94, 0.92);
+        }
+
+        .table-res {
+            background: linear-gradient(125deg, #eb3349, #f45c43);
+            color: #f1965a;
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+
+        .table-avail:hover {
+            transform: scale(1.06);
+            box-shadow: 0 18px 35px rgba(179, 21, 84, 0.5);
+        }
+
+        /* FORMS */
+        .stylish-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 24px;
+            margin: 12px 0;
+            border-radius: 60px;
+            border: 2px solid #610346;
+            background: rgb(242, 238, 233);
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .stylish-input:focus { border-color: #ff8c42; outline: none; box-shadow: 0 0 0 3px rgba(255,140,66,0.2); }
+
+        button {
+            background: linear-gradient(95deg, #f39c12, #e67e22);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 60px;
+            font-weight: 700;
+            color: white;
+            margin: 8px 10px 0 0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+        .nav-flex {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 35px;
+        }
+
+        .summary-glam {
+            background: linear-gradient(125deg, #fff5e6, #ffe0f0, #e0f3ff);
+            border-radius: 55px;
+            padding: 30px;
+            margin: 25px 0;
+            border-left: 12px solid #ff9f4a;
+        }
+    </style>
+</head>
+<body>
+
+<!-- WELCOME SCREEN -->
+<div class="welcome-screen" id="welcomeOverlay">
+    <div class="welcome-card">
+        <h1><i class="fas fa-crown"></i> RoyalTable <i class="fas fa-utensils"></i></h1>
+        <p style="color:white; font-size:1.4rem; margin:15px 0;">✨ Multi-Color Luxury Dining ✨</p>
+        <button class="enter-btn" id="enterBtn"><i class="fas fa-star-of-life"></i> Begin Journey <i class="fas fa-arrow-right"></i></button>
+    </div>
+</div>
+
+<div class="app-main" id="mainApp">
+    <div style="display: flex; justify-content: space-between; align-items:center; margin-bottom:15px;">
+        <span style="background:rgba(0,0,0,0.5); backdrop-filter:blur(8px); padding:8px 22px; border-radius:40px; color:#ffd966;"><i class="fas fa-gem"></i> Premium Multi-Color</span>
+    </div>
+    <div id="contentArea"></div>
+    <div class="menu-float" id="floatMenuBtn"><i class="fas fa-bars"></i></div>
+</div>
+
+<!-- MENU MODAL -->
+<div class="menu-premium" id="menuPremiumModal">
+    <div class="menu-inner">
+        <div style="display: flex; justify-content: space-between; align-items:center; margin-bottom:15px;">
+            <h2 style="background: linear-gradient(135deg,#d35400,#c0392b); -webkit-background-clip:text; background-clip:text; color:transparent;"><i class="fas fa-book-open"></i> Royal Signature Menu</h2>
+            <button id="closeMenuBtnX" style="background:#e74c3c;"><i class="fas fa-times"></i> Close</button>
+        </div>
+        <div class="menu-cat"><h3>🥤 Fresh Juices & Coolers</h3><div class="menu-grid" id="juiceGrid"></div></div>
+        <div class="menu-cat"><h3>🍢 Exotic Starters</h3><div class="menu-grid" id="starterGrid"></div></div>
+        <div class="menu-cat"><h3>🥦 Vegetarian Grandeur</h3><div class="menu-grid" id="vegGrid"></div></div>
+        <div class="menu-cat"><h3>🍗 Non-Veg Signature</h3><div class="menu-grid" id="nonvegGrid"></div></div>
+        <div class="menu-cat"><h3>🍰 Decadent Desserts</h3><div class="menu-grid" id="dessertGrid"></div></div>
+    </div>
+</div>
+
+<script>
+    // ---------- DATABASE ----------
+    const LOCATIONS = ['Chennai 🏙️', 'Coimbatore 🏭', 'Madurai 🛕', 'Tiruchirappalli 🌉', 'Salem 🏞️', 'Erode 🧣', 'Tirunelveli 🌊', 'Vellore 🏥', 'Thoothukudi ⚓', 'Dindigul 🍲', 'Thanjavur 🎨', 'Kanchipuram 🕉️', 'Ooty ⛰️', 'Kodaikanal 🌸', 'Rameswaram 🕍'];
+    const HOTELS_BY_STAR = {
+        '5': ['ITC Grand Chola ✨', 'The Leela Palace 👑', 'Taj Coromandel 🕌', 'Park Hyatt 🍷', 'Hyatt Regency 🌟', 'Vivanta 💎', 'Le Meridien ✨', 'Radisson Blu 🌠'],
+        '4': ['Radisson Blu ⭐', 'Novotel 🏨', 'Holiday Inn 🛏️', 'Feathers Hotel 🪶', 'Zone by The Park 🌳', 'Gokulam Park 🌺', 'Hotel Sangam 💧', 'Regency Madurai 👑'],
+        '3': ['Green Park 🌿', 'Hotel Abu Palace 🕌', 'Hotel Benzz Park ✨', 'Hotel Mars Classic 🔴', 'Hotel Pandian 🐘', 'Heritage Inn 🏛️', 'Hotel Seetharam 🕉️', 'Hotel Supreme 👑']
+    };
+    const juices = ['🥭 Mango Tango', '🍊 Orange Zest', '🍍 Pineapple Splash', '🍉 Watermelon Chill', '🍎 Apple Cinnamon', '🍇 Grape Frost', '🍋 Lemon Mint', '🥥 Coconut Paradise', '✨ Mixed Berry', '🍑 Peach Delight'];
+    const starters = ['🌶️ Gobi Manchurian', '🧀 Paneer Tikka', '🌯 Veg Spring Rolls', '🍄 Mushroom Pepper Fry', '🥬 Hara Bhara Kebab', '🍗 Chicken 65', '🐟 Fish Fry', '🦐 Prawn Dynamite', '🐑 Mutton Seekh', '🍗 Chicken Lollipop'];
+    const vegItems = ['🍚 Idli Sambar', '🥞 Masala Dosa', '🍛 Veg Biryani', '🥘 Paneer Butter Masala', '🍲 Dal Makhani', '🥟 Ghee Roast', '🍚 Curd Rice', '🌿 Lemon Rice', '🍛 Tomato Rice', '🥘 Veg Kofta', '🍛 Chole Bhature', '🥞 Malabar Parotta', '🍛 Veg Chettinad', '🥗 Avial', '🍚 Puliyodharai', '🍛 Mushroom Masala', '🥘 Veg Korma', '🍚 Bisi Bele Bath', '🌯 Veg Wrap', '🍛 Shahi Paneer'];
+    const nonvegItems = ['🍗 Chicken Biryani', '🐑 Mutton Biryani', '🍛 Egg Curry', '🦐 Prawn Masala', '🐟 Fish Curry', '🍗 Butter Chicken', '🐔 Chicken Chettinad', '🐑 Mutton Rogan Josh', '🍳 Egg Dosa', '🍗 Chicken 65 Biryani', '🦀 Crab Masala', '🐟 Nethili Fry', '🍗 Chicken Fried Rice', '🍳 Egg Fried Rice', '🐑 Mutton Sukka', '🦐 Prawn Biryani', '🍗 Pepper Chicken', '🐟 Fish Tikka', '🍗 Chicken Lollipop', '🐑 Mutton Pepper Fry'];
+    const desserts = ['🍫 Molten Lava Cake', '🍨 Gulab Jamun', '🍰 Rasmalai', '🍦 Ice Cream Sundae', '🥧 Cheesecake', '🍩 Chocolate Donut', '🍮 Caramel Custard', '🍬 Jalebi', '🥨 Baklava', '🍪 Brownie', '🍧 Falooda', '🍡 Kulfi', '🧁 Red Velvet', '🍫 Tiramisu', '🥞 Pancake Stack', '🍎 Apple Pie', '🍰 Black Forest', '🍬 Kaju Katli', '🍫 Chocolate Mousse', '🍨 Mango Sorbet'];
+
+    // ----- LOCALSTORAGE -----
+    let reservations = JSON.parse(localStorage.getItem('royal_reservations_premium') || '[]');
+    let reservedMap = new Map();
+    let nextId = reservations.length ? Math.max(...reservations.map(r=>r.id)) + 1 : 5001;
+
+    function rebuildMap() {
+        reservedMap.clear();
+        for(let res of reservations) {
+            let key = `${res.hotel}|${res.date}`;
+            if(!reservedMap.has(key)) reservedMap.set(key, new Set());
+            reservedMap.get(key).add(res.table_number);
+        }
+        const today = new Date().toISOString().split('T')[0];
+        const tom = new Date(Date.now()+86400000).toISOString().split('T')[0];
+        const after = new Date(Date.now()+172800000).toISOString().split('T')[0];
+        [[3,today],[7,today],[12,tom],[15,tom],[18,after]].forEach(([t,d]) => {
+            let k = `ALL|${d}`;
+            if(!reservedMap.has(k)) reservedMap.set(k, new Set());
+            reservedMap.get(k).add(t);
+        });
+    }
+    function isReserved(hotel, date, table) {
+        if(reservedMap.has(`ALL|${date}`) && reservedMap.get(`ALL|${date}`).has(table)) return true;
+        if(reservedMap.has(`${hotel}|${date}`) && reservedMap.get(`${hotel}|${date}`).has(table)) return true;
+        return false;
+    }
+    function getTables(hotel, date) { let arr=[]; for(let i=1;i<=20;i++) arr.push({number:i, status: isReserved(hotel,date,i)?'reserved':'available'}); return arr; }
+    function saveReservation(res) {
+        reservations.push(res);
+        localStorage.setItem('royal_reservations_premium', JSON.stringify(reservations));
+        let key = `${res.hotel}|${res.date}`;
+        if(!reservedMap.has(key)) reservedMap.set(key, new Set());
+        reservedMap.get(key).add(res.table_number);
+    }
+    rebuildMap();
+
+    let booking = { location:'', starClass:'', hotel:'', acType:'AC', mealType:'lunch', timing:'12:00-2:00 PM 🕛', date:'', persons:2, tableNumber:null };
+    let currTables = [];
+
+    function renderPage(html) { document.getElementById('contentArea').innerHTML = html; }
+
+    // Pages
+    function showLocations() {
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-map-marker-alt"></i> Choose Your Destination</div>
+                <div class="sub-tag"><i class="fas fa-globe"></i> "Where flavor meets luxury"</div>
+                <div class="rainbow-grid">${LOCATIONS.map(l => `<div class="gradient-card" onclick="selectLocation('${l.replace(/'/g,"\\'")}')">${l}</div>`).join('')}</div>
+                <div class="nav-flex"><button onclick="resetFull()"><i class="fas fa-home"></i> Home</button></div>
+            </div>
+        `);
+    }
+    window.selectLocation = (loc) => { booking.location = loc; showStar(); };
+    function showStar() {
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-star"></i> Select Star Prestige</div>
+                <div class="sub-tag">💎 "Luxury awaits at every level"</div>
+                <div class="rainbow-grid">
+                    <div class="gradient-card" onclick="selectStar('3')">⭐⭐⭐ 3-Star Hotel<br>💰 Advance ₹500</div>
+                    <div class="gradient-card" onclick="selectStar('4')">⭐⭐⭐⭐ 4-Star Hotel<br>💰 Advance ₹1000</div>
+                    <div class="gradient-card" onclick="selectStar('5')">⭐⭐⭐⭐⭐ 5-Star Hotel<br>💰 Advance ₹1500</div>
+                </div>
+                <div class="nav-flex"><button onclick="showLocations()"><i class="fas fa-arrow-left"></i> Back</button></div>
+            </div>
+        `);
+    }
+    window.selectStar = (star) => { booking.starClass = star; showHotels(); };
+    function showHotels() {
+        let hotels = HOTELS_BY_STAR[booking.starClass] || HOTELS_BY_STAR['3'];
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-hotel"></i> Premium Hotels in ${booking.location}</div>
+                <div class="sub-tag">🏆 "Elegance & Comfort Redefined"</div>
+                <div class="rainbow-grid">${hotels.map(h => `<div class="gradient-card" onclick="selectHotel('${h.replace(/'/g,"\\'")}')">🏨 ${h}</div>`).join('')}</div>
+                <div class="nav-flex"><button onclick="showStar()"><i class="fas fa-arrow-left"></i> Back</button></div>
+            </div>
+        `);
+    }
+    window.selectHotel = (hotel) => { booking.hotel = hotel; showDining(); };
+    function showDining() {
+        const todayMin = new Date().toISOString().split('T')[0];
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-utensils"></i> Customize Your Feast</div>
+                <div class="sub-tag">✨ "Tailor-made dining experience" ✨</div>
+                <label><i class="fas fa-wind"></i> AC Preference:</label><br>
+                <select id="acSel" class="stylish-input"><option value="AC">❄️ Premium AC</option><option value="Non-AC">🌿 Natural Breeze</option></select><br>
+                <label><i class="fas fa-egg"></i> Meal Type:</label><br>
+                <select id="mealSel" class="stylish-input" onchange="updateTimingDropdown()"><option value="breakfast">🍳 Breakfast</option><option value="lunch" selected>🍛 Lunch</option><option value="dinner">🍽️ Dinner</option></select><br>
+                <label><i class="fas fa-clock"></i> Timing Slot:</label><br>
+                <select id="timeSel" class="stylish-input"></select><br>
+                <label><i class="fas fa-calendar-alt"></i> Date:</label><br>
+                <input type="date" id="datePick" class="stylish-input" min="${todayMin}" value="${todayMin}"><br>
+                <label><i class="fas fa-users"></i> Persons:</label><br>
+                <input type="number" id="personCount" class="stylish-input" min="1" max="20" value="2"><br>
+                <div class="nav-flex"><button onclick="showHotels()"><i class="fas fa-arrow-left"></i> Back</button><button onclick="goToTablesPage()"><i class="fas fa-chair"></i> Select Table →</button></div>
+            </div>
+        `);
+        updateTimingDropdown();
+    }
+    window.updateTimingDropdown = () => {
+        let meal = document.getElementById('mealSel').value;
+        let opts = [];
+        if(meal === 'breakfast') opts = ['7:00-9:00 AM ☀️', '8:00-10:00 AM 🌅', '9:00-11:00 AM 🌞'];
+        else if(meal === 'lunch') opts = ['12:00-2:00 PM 🕛', '1:00-3:00 PM 🕐', '2:00-4:00 PM 🕑'];
+        else opts = ['7:00-9:00 PM 🌙', '8:00-10:00 PM ✨', '9:00-11:00 PM 🌟'];
+        let select = document.getElementById('timeSel');
+        if(select) select.innerHTML = opts.map(t => `<option value="${t}">${t}</option>`).join('');
+    };
+    window.goToTablesPage = () => {
+        booking.acType = document.getElementById('acSel').value;
+        booking.mealType = document.getElementById('mealSel').value;
+        booking.timing = document.getElementById('timeSel').value;
+        booking.date = document.getElementById('datePick').value;
+        booking.persons = parseInt(document.getElementById('personCount').value);
+        if(!booking.date){ alert('Select date'); return; }
+        currTables = getTables(booking.hotel, booking.date);
+        renderTableSelection();
+    };
+    function renderTableSelection() {
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-table"></i> Choose Your Vibrant Table</div>
+                <div class="sub-tag">💺 "Pick your perfect spot — every table tells a story" 💺</div>
+                <div class="table-palette" id="vibrantTableGrid"></div>
+                <div class="nav-flex"><button onclick="showDining()"><i class="fas fa-arrow-left"></i> Back</button><button onclick="proceedCustomer()"><i class="fas fa-check-circle"></i> Confirm Table →</button></div>
+            </div>
+        `);
+        const gridContainer = document.getElementById('vibrantTableGrid');
+        gridContainer.innerHTML = currTables.map(t => `
+            <div class="table-magic ${t.status === 'available' ? 'table-avail' : 'table-res'}" 
+                onclick="${t.status === 'available' ? `pickTable(${t.number})` : 'alert(\"🔴 This table is already reserved. Please select another.\")'}">
+                <i class="fas fa-chair"></i> Table ${t.number}<br>${t.status === 'available' ? '✅ Available' : '🔴 Reserved'}
+            </div>
+        `).join('');
+    }
+    window.pickTable = (num) => { booking.tableNumber = num; alert(`🎉 Table ${num} selected! Vibrant spot reserved.`); };
+    window.proceedCustomer = () => {
+        if(!booking.tableNumber){ alert('⚠️ Please select a table first!'); return; }
+        const advance = booking.starClass === '3' ? 500 : booking.starClass === '4' ? 1000 : 1500;
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-user-check"></i> Complete Booking</div>
+                <div class="sub-tag">💳 "Secure your royal experience"</div>
+                <div style="background:linear-gradient(125deg,#ffe6d5,#ffd9b5); padding:15px; border-radius:60px; margin-bottom:20px;"><i class="fas fa-rupee-sign"></i> Advance Amount: <strong>₹${advance}</strong> (${booking.starClass}⭐)</div>
+                <input type="text" id="custName" class="stylish-input" placeholder="Full Name"><br>
+                <input type="tel" id="custMobile" class="stylish-input" placeholder="Mobile Number"><br>
+                <input type="email" id="custEmail" class="stylish-input" placeholder="Email Address"><br>
+                <select id="paymentMode" class="stylish-input"><option>💳 Card Payment</option><option>📱 UPI / Google Pay</option><option>🏦 Net Banking</option></select><br>
+                <div class="nav-flex"><button onclick="renderTableSelection()"><i class="fas fa-arrow-left"></i> Back</button><button onclick="finalizeBooking()"><i class="fas fa-lock"></i> Pay & Confirm</button></div>
+            </div>
+        `);
+    };
+    window.finalizeBooking = () => {
+        let name = document.getElementById('custName').value.trim();
+        let mobile = document.getElementById('custMobile').value.trim();
+        let email = document.getElementById('custEmail').value.trim();
+        let payMethod = document.getElementById('paymentMode').value;
+        if(!name || !mobile || !email){ alert('All fields required!'); return; }
+        let otp = prompt('🔐 Enter OTP (Demo: 123456)');
+        if(otp !== '123456'){ alert('❌ Invalid OTP! Demo OTP: 123456'); return; }
+        let advancePaid = booking.starClass === '3' ? 500 : booking.starClass === '4' ? 1000 : 1500;
+        let newRes = {
+            id: nextId++, location: booking.location, star_class: booking.starClass, hotel: booking.hotel,
+            ac_type: booking.acType, meal_type: booking.mealType, timing: booking.timing,
+            date: booking.date, persons: booking.persons, table_number: booking.tableNumber,
+            customer_name: name, mobile, email, advance_paid: advancePaid, payment_method: payMethod
+        };
+        saveReservation(newRes);
+        showFinalSummary(newRes);
+    };
+    function showFinalSummary(res) {
+        renderPage(`
+            <div class="page-card">
+                <div class="page-header"><i class="fas fa-trophy"></i> Booking Confirmed! 🎉</div>
+                <div class="sub-tag">🌟 "Your table awaits — enjoy a magnificent dining journey!" 🌟</div>
+                <div class="summary-glam">
+                    <h3><i class="fas fa-receipt"></i> Reservation Slip</h3>
+                    <p><i class="fas fa-location-dot"></i> ${res.location} | ⭐ ${res.star_class}-Star | 🏨 ${res.hotel}</p>
+                    <p><i class="fas fa-utensils"></i> ${res.meal_type} | ⏰ ${res.timing} | 📅 ${res.date} | 👥 ${res.persons}</p>
+                    <p><i class="fas fa-chair"></i> Table ${res.table_number} | 💰 Advance ₹${res.advance_paid}</p>
+                    <p><i class="fas fa-user"></i> ${res.customer_name} | 📞 ${res.mobile} | 💳 ${res.payment_method}</p>
+                </div>
+                <div class="nav-flex"><button onclick="resetFull()"><i class="fas fa-plus-circle"></i> New Booking</button><button onclick="window.location.reload()"><i class="fas fa-sync-alt"></i> Restart</button></div>
+            </div>
+        `);
+    }
+    window.resetFull = () => { booking = { location:'', starClass:'', hotel:'', acType:'AC', mealType:'lunch', timing:'12:00-2:00 PM 🕛', date:'', persons:2, tableNumber:null }; showLocations(); };
+    function populateMenuModal(){
+        document.getElementById('juiceGrid').innerHTML = juices.map(j=>`<div class="menu-item-card">${j}</div>`).join('');
+        document.getElementById('starterGrid').innerHTML = starters.map(s=>`<div class="menu-item-card">${s}</div>`).join('');
+        document.getElementById('vegGrid').innerHTML = vegItems.map(v=>`<div class="menu-item-card">${v}</div>`).join('');
+        document.getElementById('nonvegGrid').innerHTML = nonvegItems.map(n=>`<div class="menu-item-card">${n}</div>`).join('');
+        document.getElementById('dessertGrid').innerHTML = desserts.map(d=>`<div class="menu-item-card">${d}</div>`).join('');
+    }
+    // entry
+    document.getElementById('enterBtn').addEventListener('click', ()=>{
+        document.getElementById('welcomeOverlay').style.transform = 'translateX(-120%)';
+        setTimeout(()=>{
+            document.getElementById('welcomeOverlay').style.display='none';
+            document.getElementById('mainApp').style.display='block';
+            showLocations();
+        },600);
+    });
+    const menuModal = document.getElementById('menuPremiumModal');
+    document.getElementById('floatMenuBtn').onclick = () => { menuModal.style.display='block'; populateMenuModal(); };
+    document.getElementById('closeMenuBtnX').onclick = () => { menuModal.style.display='none'; };
+    menuModal.onclick = (e) => { if(e.target === menuModal) menuModal.style.display='none'; };
+</script>
+</body>
+</html>
