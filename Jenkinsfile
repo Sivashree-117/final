@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t %DOCKER_IMAGE%:latest .'
+                bat "docker build -t %DOCKER_IMAGE%:latest ."
             }
         }
 
@@ -26,27 +26,36 @@ pipeline {
                     usernameVariable: 'sivashree117',
                     passwordVariable: 'Sivashree@26'
                 )]) {
-                    bat '''
+                    bat """
                     echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                    '''
+                    """
                 }
             }
         }
 
         stage('Push Image') {
             steps {
-                bat 'docker push %DOCKER_IMAGE%:latest'
+                bat "docker push %DOCKER_IMAGE%:latest"
             }
         }
 
         stage('Run Container') {
             steps {
-                bat '''
-                docker stop royaltable || true
-                docker rm royaltable || true
+                bat """
+                docker stop royaltable || echo not running
+                docker rm royaltable || echo not exists
                 docker run -d -p 8081:80 --name royaltable %DOCKER_IMAGE%:latest
-                '''
+                """
             }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline SUCCESS ✅"
+        }
+        failure {
+            echo "Pipeline FAILED ❌"
         }
     }
 }
