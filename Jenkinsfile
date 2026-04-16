@@ -1,16 +1,23 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Clone Code') {
-    steps {
-        git branch: 'main', url: 'https://github.com/Sivashree-117/final.git'
+    environment {
+        IMAGE_NAME = "sivashree117/royaltable"
     }
-}
+
+    stages {
+
+        stage('Clone Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Sivashree-117/final.git'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t sivashree117/royaltable:latest .'
+                bat '''
+                docker build -t %IMAGE_NAME%:latest .
+                '''
             }
         }
 
@@ -30,13 +37,19 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                bat 'docker push sivashree117/royaltable:latest'
+                bat '''
+                docker push %IMAGE_NAME%:latest
+                '''
             }
         }
 
         stage('Run Container') {
             steps {
-                bat 'docker run -d -p 8080:80 sivashree117/royaltable:latest'
+                bat '''
+                docker stop royaltable-container || exit 0
+                docker rm royaltable-container || exit 0
+                docker run -d -p 8080:80 --name royaltable-container %IMAGE_NAME%:latest
+                '''
             }
         }
     }
