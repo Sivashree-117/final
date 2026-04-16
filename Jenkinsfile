@@ -10,7 +10,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Sivashree-117/YOUR-REPO-NAME.git'
+                git branch: 'main', url: 'https://github.com/Sivashree-117/final.git'
             }
         }
 
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'sivashree117', passwordVariable: 'Sivashree@26')]) {
                     sh 'echo $PASS | docker login -u $USER --password-stdin'
                 }
             }
