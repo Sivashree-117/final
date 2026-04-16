@@ -22,7 +22,7 @@ pipeline {
 
         stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'sivashree117', passwordVariable: 'Sivashree@26')]) {
+                withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'sivashree117', passwordVariable: 'Sivashree@26')]) {
                     bat 'echo %PASS% | docker login -u %USER% --password-stdin'
                 }
             }
